@@ -26,6 +26,7 @@ const PORT = process.env.PORT || 5001;
 
 const allowedOrigins = [
   'http://localhost:5000',
+  'http://localhost:5173',
   'https://yaababyent.vercel.app',
   process.env.FRONTEND_URL
 ].filter(Boolean);
@@ -73,6 +74,11 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(checkMaintenanceMode);
+app.use(express.static('public'));
+
+// Health check routes
+app.get('/', (req, res) => res.json({ status: 'ok', message: 'Yaa Baby Backend API is running' }));
+app.get('/api/health', (req, res) => res.json({ status: 'ok', timestamp: new Date() }));
 
 // Routes
 app.use('/api/auth', authRoutes);
