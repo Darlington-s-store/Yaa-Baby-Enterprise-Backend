@@ -206,8 +206,10 @@ export const firebaseGoogleLogin = async (req, res) => {
 
   try {
     // 1. Verify the ID token using Firebase Admin SDK
+    console.log("🔐 Verifying Firebase ID Token...");
     const decodedToken = await admin.auth().verifyIdToken(idToken);
     const { email, name, picture, uid } = decodedToken;
+    console.log(`✅ Token verified for: ${email} (UID: ${uid})`);
 
     // 2. Find or create user in our DB
     let user = await User.findOne({ where: { email } });
