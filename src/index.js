@@ -27,6 +27,7 @@ const PORT = process.env.PORT || 5001;
 const allowedOrigins = [
   'http://localhost:5000',
   'http://localhost:5173',
+  'http://localhost:8081',
   'https://yaababyent.vercel.app',
   process.env.FRONTEND_URL
 ].filter(Boolean);
